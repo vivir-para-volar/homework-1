@@ -36,10 +36,12 @@ function correctSpaces(str) {
 
 // Количество слов
 function countWords(str) {
-  str = correctSpaces(str);
+  if (typeof str !== "string") throw new Error("Некорректные данные");
+
+  str = str.trim();
   if (str === "") return 0;
 
-  return str.split(" ").length;
+  return str.split(" ").filter((item) => item).length;
 }
 
 // Подсчёт уникальных слов
@@ -52,7 +54,7 @@ function countUniqueWords(str) {
     .filter((item) => item);
 
   const uniqueWords = {};
-  
+
   words.forEach((word) => {
     if (word in uniqueWords) {
       uniqueWords[word]++;
